@@ -38,11 +38,31 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-// POST /products - placeholder sebelum migrasi create ke Prisma
+// POST produk baru ke database PostgreSQL
 exports.createProduct = async (req, res) => {
   const { name, price } = req.body;
-  if (!name || price === undefined) {
-    return res.status(400).json({ message: 'Nama dan harga produk wajib diisi' });
+
+  if (
+    typeof name !== 'string' ||
+    !name.trim() ||
+    !Number.isSafeInteger(Number(price)) ||
+    Number(price) < 0
+  ) {
+    return res.status(400).json({
+      message: 'Nama dan harga produk tidak valid'
+    });
   }
-  return res.status(201).json({ id: 1, name, price });
+
+  try {
+    const product = await prisma.product.create({
+      data: {
+        name: name.trim(),
+        price: Number(price)
+      }
+    });
+
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ message: 'Gagal menambahkan produk' });
+  }
 };
