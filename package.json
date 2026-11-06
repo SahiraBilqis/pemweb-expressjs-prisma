@@ -1,13 +1,22 @@
 {
   "name": "expressjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "REST API CRUD Produk menggunakan ExpressJS, Prisma ORM, dan PostgreSQL",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "seed": "node seed.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "prisma",
+    "postgresql",
+    "rest-api"
+  ],
+  "author": "Sahira Bilqis Rivadito",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
