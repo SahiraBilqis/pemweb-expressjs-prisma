@@ -6,7 +6,7 @@ Repositori ini berisi implementasi REST API untuk manajemen data produk yang dik
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 - **Runtime & Bahasa**: Node.js (JavaScript CommonJS)
 - **Web Framework**: Express.js (v5)
@@ -20,7 +20,7 @@ Repositori ini berisi implementasi REST API untuk manajemen data produk yang dik
 
 ---
 
-## 📂 Struktur Direktori Proyek
+## Struktur Direktori Proyek
 
 ```text
 expressjs/
@@ -48,7 +48,7 @@ expressjs/
 
 ---
 
-## ⚙️ Skema Basis Data & Konfigurasi Prisma
+## Skema Basis Data & Konfigurasi Prisma
 
 Model data didefinisikan pada file `prisma/schema.prisma`:
 
@@ -76,7 +76,7 @@ model Product {
 
 ---
 
-## 🚀 Panduan Instalasi dan Menjalankan Program
+## Panduan Instalasi dan Menjalankan Program
 
 ### 1. Kloning Repositori
 ```bash
@@ -133,7 +133,7 @@ Buka antarmuka web di: `http://localhost:5555`.
 
 ---
 
-## 📌 Daftar Endpoint REST API
+## Daftar Endpoint REST API
 
 | Method | Endpoint | Deskripsi | Status Sukses | Penanganan Validasi / Error |
 |---|---|---|---|---|
@@ -147,7 +147,7 @@ Buka antarmuka web di: `http://localhost:5555`.
 
 ---
 
-## 📝 Contoh Request & Response
+## Contoh Request & Response
 
 ### 1. GET Semua Produk
 - **URL**: `GET http://localhost:3000/products`
@@ -234,7 +234,7 @@ Buka antarmuka web di: `http://localhost:5555`.
 
 ---
 
-## 🛡️ Skenario Validasi & Penanganan Kesalahan (Error Handling)
+## Skenario Validasi & Penanganan Kesalahan (Error Handling)
 
 1. **400 Bad Request (Kesalahan Input Klien)**:
    - Terjadi jika `id` bukan bilangan bulat positif (misal string atau <= 0).
@@ -268,7 +268,7 @@ Buka antarmuka web di: `http://localhost:5555`.
 
 ---
 
-## 📷 Dokumentasi Hasil Pengujian (Evidence Report)
+## Dokumentasi Hasil Pengujian (Evidence Report)
 
 Berikut adalah rekapitulasi bukti pengujian API menggunakan **Hoppscotch** dan **Postman**, serta verifikasi perubahan data secara langsung di basis data PostgreSQL menggunakan **Prisma Studio**.
 
