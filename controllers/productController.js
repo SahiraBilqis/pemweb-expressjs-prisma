@@ -66,3 +66,42 @@ exports.createProduct = async (req, res) => {
     res.status(500).json({ message: 'Gagal menambahkan produk' });
   }
 };
+
+// PUT update produk berdasarkan ID (mendukung id via URL params atau request body)
+exports.updateProduct = async (req, res) => {
+  const rawId = req.params.id !== undefined ? req.params.id : req.body.id;
+  const id = Number(rawId);
+  const { name, price } = req.body;
+
+  if (
+    !Number.isSafeInteger(id) ||
+    id <= 0 ||
+    typeof name !== 'string' ||
+    !name.trim() ||
+    !Number.isSafeInteger(Number(price)) ||
+    Number(price) < 0
+  ) {
+    return res.status(400).json({
+      message: 'ID, nama, atau harga tidak valid'
+    });
+  }
+
+  try {
+    const product = await prisma.product.update({
+      where: { id },
+      data: {
+        name: name.trim(),
+        price: Number(price)
+      }
+    });
+
+    res.status(200).json(product);
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({
+        message: 'Produk tidak ditemukan'
+      });
+    }
+    res.status(500).json({ message: 'Gagal mengupdate produk' });
+  }
+};
