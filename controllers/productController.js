@@ -69,7 +69,7 @@ exports.createProduct = async (req, res) => {
 
 // PUT update produk berdasarkan ID (mendukung id via URL params atau request body)
 exports.updateProduct = async (req, res) => {
-  const rawId = req.params.id !== undefined ? req.params.id : req.body.id;
+  const rawId = req.params.id !== undefined ? req.params.id : req.body?.id;
   const id = Number(rawId);
   const { name, price } = req.body;
 
@@ -103,5 +103,32 @@ exports.updateProduct = async (req, res) => {
       });
     }
     res.status(500).json({ message: 'Gagal mengupdate produk' });
+  }
+};
+
+// DELETE produk berdasarkan ID (mendukung id via URL params atau request body)
+exports.deleteProduct = async (req, res) => {
+  const rawId = req.params.id !== undefined ? req.params.id : req.body?.id;
+  const id = Number(rawId);
+
+  if (!Number.isSafeInteger(id) || id <= 0) {
+    return res.status(400).json({ message: 'ID tidak valid' });
+  }
+
+  try {
+    await prisma.product.delete({
+      where: { id }
+    });
+
+    res.status(200).json({
+      message: 'Produk berhasil dihapus'
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({
+        message: 'Produk tidak ditemukan'
+      });
+    }
+    res.status(500).json({ message: 'Gagal menghapus produk' });
   }
 };
